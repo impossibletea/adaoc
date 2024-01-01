@@ -1,0 +1,4 @@
+project AdaOC is
+	for Main use ("main");
+	for Object_Dir use "target/";
+end AdaOC;
