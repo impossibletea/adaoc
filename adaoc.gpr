@@ -1,4 +1,6 @@
 project AdaOC is
-	for Main use ("main");
-	for Object_Dir use "target/";
+	for main        use ("adaoc");
+	for source_dirs use ("src",
+		                 "src/days");
+	for object_dir  use "build";
 end AdaOC;
