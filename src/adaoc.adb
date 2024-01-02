@@ -1,14 +1,14 @@
-with Ada.text_io;           use Ada.text_io;
-with Ada.command_line;      use Ada.command_line;
-with Ada.strings.unbounded; use Ada.strings.unbounded;
+with Ada.text_io;      use Ada.text_io;
+with Ada.command_line; use Ada.command_line;
+with Trebuchet;
 
 procedure adaoc is
 
 	type Day is new Integer range 1..25;
 
-	d    : Day;
-	file : Unbounded_String;
-	sol  : Integer;
+	d      : Day;
+	part_1 : Integer;
+	part_2 : Integer;
 
 begin
 
@@ -37,14 +37,35 @@ begin
 
 	end;
 
-	file := to_unbounded_string (argument (2));
+	declare
 
-	put_line
-		("Solving day" & d'image
-		 & " with file '" & to_string (file) & "'");
-	sol := 0;
+		file      : File_Type;
+		file_name : String := argument (2);
 
-	put_line (sol'image);
+	begin
+
+		put_line
+			("Solving day" & d'image
+			& " with file '" & file_name & "'");
+		open
+			(file => file,
+			 mode => In_File,
+			 name => file_name);
+
+		case d is
+			when 1 =>
+				part_1 := Trebuchet.part_1 (file);
+				part_2 := Trebuchet.part_2 (file);
+			when others =>
+				put_line ("Not yet implemented");
+				set_exit_status (Failure);
+				return;
+		end case;
+
+	end;
+
+	put_line ("Part 1:" & part_1'image);
+	put_line ("Part 2:" & part_2'image);
 
 end adaoc;
 
