@@ -11,7 +11,6 @@ procedure adaoc is
 	part_2 : Integer;
 
 begin
-
 	if argument_count < 2 then
 		put_line ("Usage:");
 		put_line ("  " & command_name & " <day> <input_file>");
@@ -22,7 +21,6 @@ begin
 	declare
 		input : Integer := Integer'value (argument (1));
 	begin
-
 		if input not in 1..25 then
 			put_line
 				("Day" & input'image & " is out of Advent Canendar range");
@@ -34,7 +32,6 @@ begin
 		end if;
 
 		d := Day (input);
-
 	end;
 
 	declare
@@ -43,7 +40,6 @@ begin
 		file_name : String := argument (2);
 
 	begin
-
 		put_line
 			("Solving day" & d'image
 			& " with file '" & file_name & "'");
@@ -55,13 +51,13 @@ begin
 		case d is
 			when 1 =>
 				part_1 := Trebuchet.part_1 (file);
+				reset (file);
 				part_2 := Trebuchet.part_2 (file);
 			when others =>
 				put_line ("Not yet implemented");
 				set_exit_status (Failure);
 				return;
 		end case;
-
 	end;
 
 	put_line ("Part 1:" & part_1'image);
